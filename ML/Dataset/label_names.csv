@@ -1,0 +1,46 @@
+ClassId,SignName
+0,Batas Kecepatan (20km/h)
+1,Batas Kecepatan (30km/h)
+2,Batas Kecepatan (50km/h)
+3,Batas Kecepatan (60km/h)
+4,Batas Kecepatan (70km/h)
+5,Batas Kecepatan (80km/h)
+6,Akhir Batas Kecepatan (80km/h)
+7,Batas Kecepatan (100km/h)
+8,Batas Kecepatan (120km/h)
+9,Larangan Masuk
+10,Larangan Masuk untuk Kendaraan Lebih Berat dari 3.5 metric tons
+11,Peringatan Persimpangan
+12,Lajur Prioritas
+13,"Larangan Berjalan Terus karena Wajib Memberi Prioritas Kepada Arus Lalu Lintas
+Larangan Berjalan Terus karena Wajib Memberi Prioritas Kepada Arus Lalu Lintas
+dari Arah yang Diberi Prioritas"
+14,Stop
+15,Kendaraan Dilarang Masuk
+16,Kendaraan Lebih Berat dari 3.5 metric tons Dilarang Masuk
+17,Dilarang Masuk
+18,Peringatan
+19,Tikungan Tajam ke Kiri
+20,Tikungan Tajam ke Kanan
+21,Tikungan Ganda
+22,Jalan Bergelombang
+23,Permukaan Jalan Licin
+24,Pengurangan Lajur Kanan
+25,Peringatan Pekerjaan di Jalan
+26,Lamu Lalu Lintas
+27,Peringatan Banyak Lalu Lintas Pejalan Kaki
+28,Peringatan Banyak Lalu Lintas Pejalan Kaki Anak-anak
+29,Peringatan Banyak Lalu Lintas Sepeda
+30,Hati-hati es/salju
+31,Peringatan Banyak Hewan Liar Melintas
+32,Batas Akhir Seluruh Larangan yang Dinyatakan oleh Satu atau Lebih Rambu Larangan
+33,Perintah Belok ke Arah Kanan
+34,Perintah Belok ke Arah Kiri
+35,Perintah Berjalan Lurus
+36,Perintah memilih Lurus atau Belok Kanan
+37,Perintah memilih Lurus atau Belok Kiri
+38,Tetap di Lajur Kanan
+39,Tetap di Lajur Kiri
+40,Perintah Mengikuti Arah yang Ditunjukkan saat Memasuki Bundaran
+41,Akhir dari Dilarang Masuk
+42,Akhir dari Dilarang Masuk untuk Kendaraan Lebih Berat dari 3.5 metric tons
