@@ -13,3 +13,6 @@
  *
  * @see: https://codeigniter4.github.io/CodeIgniter4/
  */
+
+
+define("MEMBER_PATH", "client");
