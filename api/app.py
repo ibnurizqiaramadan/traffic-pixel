@@ -44,7 +44,7 @@ def label_text(file):
     return label_list
 
 
-labels = label_text('../ML/dataset/label_names.csv')
+labels = label_text('../ML/Dataset/label_names.csv')
 
 
 def predict_image(path):
