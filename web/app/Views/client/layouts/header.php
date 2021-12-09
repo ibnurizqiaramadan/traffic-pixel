@@ -20,7 +20,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="<?= base_url() ?>/assets/client/assets/css/material-dashboard.min.css?v=3.0.0" rel="stylesheet" />
-    <link href="<?= base_url() ?>/assets/client/custom.css" rel="stylesheet" />
 
     <?= $this->include('client/layouts/js'); ?>
 
