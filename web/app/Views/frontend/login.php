@@ -36,7 +36,7 @@
                             </div>
 
                             <div>
-                                <p class="mb-0">Tidak punya akun? <a href="#!" class="text-white-50 fw-bold">Daftar</a></p>
+                                <p class="mb-0">Tidak punya akun? <a href="<?= base_url("register") ?>" class="text-white-50 fw-bold">Daftar</a></p>
                             </div>
 
                         </div>
