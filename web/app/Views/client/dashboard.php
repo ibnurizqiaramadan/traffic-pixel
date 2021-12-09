@@ -1,4 +1,4 @@
-<?= $this->extend('Client/layouts/app'); ?>
+<?= $this->extend('client/layouts/app'); ?>
 
 <?= $this->section('content') ?>
 <div class="row">
