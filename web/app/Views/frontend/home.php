@@ -52,13 +52,12 @@
             <div class="col-lg-4 ms-auto">
                 <img src="<?= base_url("assets/front/img/tim/ibnu.jpg") ?>" alt="" class="img-fluid rounded border">
                 <p class="h4 mt-3">Ibnu Rizqia Ramadan</p>
-                <p class="lead">Seorang mahasiswa dari kampus STMIK Bandung dan juga seorang Backend developer yang ...</p>
+                <p class="lead">Seorang mahasiswa dari kampus STMIK Bandung yang sedang belajar menjadi seorang Fullstack developer</p>
             </div>
             <div class="col-lg-4 me-auto">
                 <img src="<?= base_url("assets/front/img/tim/vian.jpg") ?>" alt="" class="img-fluid rounded border">
                 <p class="h4 mt-3">Nanda Vian N.</p>
-                <p class="lead">You can create your own custom avatar for the masthead, change the icon in the
-                    dividers, and add your email address to the contact form to make it fully functional!</p>
+                <p class="lead">Mahasiswa ITS yang sedang belajar di bidang Machine Learning</p>
             </div>
         </div>
         <!-- About Section Button-->
