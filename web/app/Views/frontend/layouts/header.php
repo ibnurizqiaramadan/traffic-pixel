@@ -8,7 +8,7 @@
     <meta name="author" content="" />
     <title>Traffic Pixel - <?= $title ?? 'Belajar rambu lalulintas'; ?></title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/front/img/icon.png') ?>">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" defer crossorigin="anonymous"></script>
     <!-- Google fonts-->
