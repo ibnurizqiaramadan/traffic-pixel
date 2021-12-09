@@ -35,7 +35,7 @@ $routes->get('/', 'Home::index');
 $routes->get('login', 'Login::index');
 $routes->get('register', 'Register::index');
 
-$routes->group('member', ['namespace' => 'App\Controllers\Client'], function ($routes) {
+$routes->group('client', ['namespace' => 'App\Controllers\Client'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
     $routes->get('dashboard', 'Dashboard::index');
 });
