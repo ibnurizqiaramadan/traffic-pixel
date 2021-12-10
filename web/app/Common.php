@@ -15,4 +15,7 @@
  */
 
 
-define("MEMBER_PATH", "client");
+define('DATE_NOW', date('Y-m-d H:i:s', time()));
+define("MEMBER_PATH", "/client");
+define('ADMIN_PATH', '/ruangadmin');
+define('API_PATH', '/api');
