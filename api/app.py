@@ -82,7 +82,7 @@ def get_hours():
         print(np.argmax(p[0]))
 
         if arrayOri[np.argmax(p[0])] != 1:
-            for x in range(5):
+            for x in range(3):
                 for i in arrayCopy:
                     if arrayCopy[x] == i:
                         result = np.where(p[0] == i)
