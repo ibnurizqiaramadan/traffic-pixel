@@ -38,6 +38,7 @@ $routes->get('register', 'Register::index');
 $routes->group('client', ['namespace' => 'App\Controllers\Client'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
     $routes->get('dashboard', 'Dashboard::index');
+    $routes->get('scan', 'Scan::index');
 });
 
 /*
