@@ -30,9 +30,9 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Portfolio Grid Items-->
-        <div class="row text-center">
+        <div class="row text-center fs-5">
             <!-- Portfolio Item 1-->
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, perferendis amet dicta, laudantium nobis dolores provident omnis labore molestiae laborum quia quam expedita magnam consectetur totam sit vel. Recusandae, quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi possimus blanditiis nihil id in, velit adipisci doloribus, molestiae saepe nobis exercitationem distinctio porro expedita dolore, quasi veniam non nemo vitae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, eligendi aperiam vel fuga nesciunt quidem nihil in modi nostrum porro optio dolorum iure corrupti maiores aspernatur hic ut necessitatibus? Quasi.
+            TrafficPixel Merupakan aplikasi untuk memprediksi arti dari gambar rambu-rambu lalu lintas yang ada di jalan raya. Perlu diketahui bahwa masih banyak masyarakat indonesia terutama di kalangan remaja yang baru pertama kali membawa kendaraan belum mengetahui tentang arti dari rambu lalu lintas yang ada di jalan raya. Arti dari rambu lalu lintas penting untuk diketahui untuk menjaga ketertiban jalan dan mencegah kecelakaan. Oleh karena itu kami membuat aplikasi ini untuk mempermudah masyarakat mencari arti dari rambu lalu lintas.
         </div>
     </div>
 </section>
