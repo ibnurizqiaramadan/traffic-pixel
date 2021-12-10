@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 import cv2
 
-UPLOAD_FOLDER = os.getcwd() + "\images"
+UPLOAD_FOLDER = os.getcwd() + os.path.sep + "images"
 
 app = Flask(__name__)
 CORS(app, resources={r"/submit": {"origins": "*"}})
