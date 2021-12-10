@@ -1,17 +1,19 @@
 from uuid import uuid4
-from flask import Flask, render_template, request
 from keras.models import load_model
 from keras.preprocessing import image
 import os
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
+from flask_cors import CORS, cross_origin
 import json
 import pandas as pd
 import numpy as np
+import cv2
 
 UPLOAD_FOLDER = os.getcwd() + "\images"
 
 app = Flask(__name__)
+CORS(app, resources={r"/submit": {"origins": "*"}})
 
 model = load_model('../ML/Model/model_final.h5')
 
@@ -48,7 +50,7 @@ labels = label_text('../ML/Dataset/label_names.csv')
 
 
 def predict_image(path):
-    print(path)
+    # print(path)
     i = image.load_img(path, target_size=(32, 32))
     i = image.img_to_array(i)/255.0
     x = np.expand_dims(i, axis=0)
@@ -56,19 +58,72 @@ def predict_image(path):
     return hasil
 
 
-@app.route("/submit", methods=['GET', 'POST'])
+def findBoundingBox1(img_path):
+    image = cv2.imread(img_path)
+    original = image.copy()
+
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    thresh = cv2.threshold(
+        gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
+    cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
+    ROI_number = 0
+    print(cnts)
+    aaa = np.argmax(cnts[0])
+    print(aaa)
+    # return
+    for c in cnts:
+        # return
+        x, y, w, h = cv2.boundingRect(c)
+        cv2.rectangle(image, (x, y), (x + w, y + h), (36, 255, 12), 2)
+        ROI = original[y:y+h, x:x+w]
+        cv2.imwrite('ROI_{}.png'.format(ROI_number), ROI)
+        ROI_number += 1
+
+    # cv2.imshow('image', image)
+    # cv2.waitKey()
+
+
+def findBoundingBox2(img_path, filename):
+    image = cv2.imread(img_path)
+    # original = image.copy()
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    thresh = cv2.threshold(
+        gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
+
+    # Find contours, obtain bounding box, extract and save ROI
+    cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
+
+    # Find object with the biggest bounding box
+    mx = (0, 0, 0, 0)      # biggest bounding box so far
+    mx_area = 0
+    for cont in cnts:
+        x, y, w, h = cv2.boundingRect(cont)
+        area = w*h
+        if area > mx_area:
+            mx = x, y, w, h
+            mx_area = area
+    x, y, w, h = mx
+
+    roi = image[y:y+h, x:x+w]
+    cv2.imwrite(f"images/{filename}", roi)
+    return f"images/{filename}"
+
+
+@app.route("/submit", methods=['POST'])
 def get_hours():
     if request.method == 'POST':
-        img = request.files['my_image']
+        img = request.files['imagePredict']
 
         # img_path = "/" + img.filename
         filename = make_unique(img.filename)
         img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        findBoundingBox2(img_path, filename)
         p = predict_image(img_path)
         os.remove(img_path)
-        # p = np.asarray(p)
-        # print(p)
 
         arrayOri = p[0]
 
@@ -108,10 +163,10 @@ def get_hours():
                     "confident": item_['confident']
                 })
         json_object = json.dumps(hasil, indent=4)
-        print(json_object)
         return json_object
 
 
 if __name__ == '__main__':
     # app.debug = True
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
