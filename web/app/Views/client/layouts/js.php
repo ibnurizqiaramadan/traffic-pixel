@@ -1,4 +1,5 @@
 <!--   Core JS Files   -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 <script src="<?= base_url() ?>/assets/client/assets/js/core/popper.min.js" defer></script>
 <script src="<?= base_url() ?>/assets/client/assets/js/core/bootstrap.min.js" defer></script>
 <script src="<?= base_url() ?>/assets/client/assets/js/plugins/perfect-scrollbar.min.js" defer></script>
