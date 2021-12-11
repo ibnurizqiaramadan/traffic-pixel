@@ -8,6 +8,9 @@ class Scan extends BaseController
 {
     public function index()
     {
-        return view('client/scan');
+        return view('client/scan', [
+            "title" => "Pindai Rambu",
+            "menu" => "scan"
+        ]);
     }
 }
