@@ -8,4 +8,9 @@ class Home extends BaseController
     {
         return view('frontend/home');
     }
+
+    public function scan()
+    {
+        return view('frontend/scan');
+    }
 }

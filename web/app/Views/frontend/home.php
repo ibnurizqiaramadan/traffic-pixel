@@ -103,3 +103,8 @@
 
 </html>
 <?= $this->endSection() ?>
+
+<?= $this->section('js'); ?>
+<script src="<?= base_url("assets/front/js/scripts.js") ?>" defer></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js" defer></script>
+<?= $this->endSection() ?>

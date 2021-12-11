@@ -51,7 +51,7 @@ labels = label_text("../ML/Dataset/label_names.csv")
 def predict_image(path):
     # print(path)
     i = image.load_img(path, target_size=(32, 32))
-    i = image.img_to_array(i) / 255.0
+    i = image.img_to_array(i)
     x = np.expand_dims(i, axis=0)
     hasil = model.predict(x)
     return hasil
