@@ -20,5 +20,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
-<script src="<?= base_url('assets/js/camera.js') ?>" defer></script>
+<script src="<?= base_url('assets/js/camera.js') . "?" . time() ?> " defer></script>
 <?= $this->endSection() ?>
