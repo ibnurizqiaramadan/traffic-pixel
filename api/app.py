@@ -1,19 +1,18 @@
-from uuid import uuid4
-from keras.models import load_model
-from keras.preprocessing import image
 import os
-from flask import Flask, flash, request, redirect, url_for
-from werkzeug.utils import secure_filename
-from flask_cors import CORS, cross_origin
 import json
 import pandas as pd
 import numpy as np
 import cv2
-
-UPLOAD_FOLDER = os.getcwd() + os.path.sep + "images"
+from uuid import uuid4
+from keras.models import load_model
+from keras.preprocessing import image
+from flask import Flask, request
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app, resources={r"/submit": {"origins": "*"}})
+cors = CORS(app)
+
+UPLOAD_FOLDER = os.getcwd() + os.path.sep + "images"
 
 model = load_model("../ML/Model/model_final.h5")
 
@@ -21,7 +20,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 @app.route("/", methods=["GET", "POST"])
-def index():
+def hello():
     print(labels)
     return "hello"
 
@@ -58,33 +57,7 @@ def predict_image(path):
     return hasil
 
 
-def findBoundingBox1(img_path):
-    image = cv2.imread(img_path)
-    original = image.copy()
-
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
-    cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-    ROI_number = 0
-    print(cnts)
-    aaa = np.argmax(cnts[0])
-    print(aaa)
-    # return
-    for c in cnts:
-        # return
-        x, y, w, h = cv2.boundingRect(c)
-        cv2.rectangle(image, (x, y), (x + w, y + h), (36, 255, 12), 2)
-        ROI = original[y : y + h, x : x + w]
-        cv2.imwrite("ROI_{}.png".format(ROI_number), ROI)
-        ROI_number += 1
-
-    # cv2.imshow('image', image)
-    # cv2.waitKey()
-
-
-def findBoundingBox2(img_path, filename):
+def findBoundingBox(img_path, filename):
     image = cv2.imread(img_path)
     # original = image.copy()
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -106,33 +79,34 @@ def findBoundingBox2(img_path, filename):
     x, y, w, h = mx
 
     roi = image[y : y + h, x : x + w]
-    cv2.imwrite(f"images/{filename}", roi)
-    return f"images/{filename}"
+    # print()
+    cv2.imwrite(
+        os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png"), roi
+    )
+    return os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png")
 
 
-@app.route("/submit", methods=["POST"])
-def get_hours():
+@app.route("/predict", methods=["GET", "POST"])
+def getPredict():
     if request.method == "POST":
         img = request.files["imagePredict"]
 
-        # img_path = "/" + img.filename
         filename = make_unique(img.filename)
-        img.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        img_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-        findBoundingBox2(img_path, filename)
-        p = predict_image(img_path)
-        os.remove(img_path)
+        img.save(os.path.join(app.config["UPLOAD_FOLDER"], filename + ".png"))
+        img_path = os.path.join(app.config["UPLOAD_FOLDER"], filename + ".png")
+        p = predict_image(findBoundingBox(img_path, filename))
+        # os.remove(img_path)
 
         arrayOri = p[0]
 
         arrayCopy = np.sort(p[0])[::-1]
 
-        print(arrayOri)
-        print(arrayCopy)
+        # print(arrayOri)
+        # print(arrayCopy)
 
         tampungIndex = []
 
-        print(np.argmax(p[0]))
+        # print(np.argmax(p[0]))
 
         if arrayOri[np.argmax(p[0])] != 1:
             for x in range(3):
@@ -144,11 +118,7 @@ def get_hours():
                         )
         else:
             tampungIndex.append({"index": np.argmax(p[0]), "confident": "1"})
-
-        print(tampungIndex)
-
         hasil = []
-
         for item_ in tampungIndex:
             print(item_)
             if float(item_["confident"]) != 0.0:
@@ -157,6 +127,8 @@ def get_hours():
                 )
         json_object = json.dumps(hasil, indent=4)
         return json_object
+
+        # return json_object
 
 
 if __name__ == "__main__":
