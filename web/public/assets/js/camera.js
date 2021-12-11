@@ -72,7 +72,7 @@ function predict() {
     formdata.append("imagePredict", file);
 
     $.ajax({
-        url: "http://localhost:6901/predict",
+        url: "https://predict-traffic.inh.pw/predict",
         type: "POST",
 		data: formdata,
 		processData: !1,
