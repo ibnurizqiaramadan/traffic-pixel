@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main" style="height: auto">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white active bg-primary" href="<?= base_url(MEMBER_PATH) ?>/dashboard">
+                <a class="nav-link text-white <?= ($menu ?? '') == "dashboard" ? 'active bg-primary' : '' ?>" href="<?= base_url(MEMBER_PATH) ?>/dashboard">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="<?= base_url(MEMBER_PATH) ?>/scan">
+                <a class="nav-link text-white <?= ($menu ?? '') == "scan" ? 'active bg-primary' : '' ?>" href="<?= base_url(MEMBER_PATH) ?>/scan">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">photo_camera</i>
                     </div>
