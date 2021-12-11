@@ -79,10 +79,12 @@ function predict() {
 		contentType: !1,
 		dataType: "JSON",
 		beforeSend: function () {
-            //  
+            $("#btnAmbilFoto").append(' <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>')
+            $("#btnAmbilFoto").attr("disabled", !0)
 		},
 		complete: function () {
-			// 
+			$("#btnAmbilFoto").find("span").remove()
+            $("#btnAmbilFoto").removeAttr("disabled")
 		},
 		success: function (e) {
             let html = ''
