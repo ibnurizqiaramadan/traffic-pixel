@@ -79,7 +79,7 @@ function predict() {
 		contentType: !1,
 		dataType: "JSON",
 		beforeSend: function () {
-            // 
+            //  
 		},
 		complete: function () {
 			// 
