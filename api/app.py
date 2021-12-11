@@ -131,6 +131,53 @@ def getPredict():
         # return json_object
 
 
+@app.route("/predict-v2", methods=["GET", "POST"])
+def getPredict2():
+    if request.method == "POST":
+        img = request.files["imagePredict"]
+
+        filename = make_unique(img.filename)
+        img.save(os.path.join(app.config["UPLOAD_FOLDER"], filename + ".png"))
+        img_path = os.path.join(app.config["UPLOAD_FOLDER"], filename + ".png")
+        p = predict_image(findBoundingBox(img_path, filename))
+
+        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], filename + ".png"))
+        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png"))
+
+        arrayOri = p[0]
+
+        arrayCopy = np.sort(p[0])[::-1]
+
+        # print(arrayOri)
+        # print(arrayCopy)
+
+        tampungIndex = []
+
+        # print(np.argmax(p[0]))
+
+        if arrayOri[np.argmax(p[0])] != 1:
+            for x in range(3):
+                for i in arrayCopy:
+                    if arrayCopy[x] == i:
+                        result = np.where(p[0] == i)
+                        tampungIndex.append(
+                            {"index": result[0][0], "confident": str(i)}
+                        )
+        else:
+            tampungIndex.append({"index": np.argmax(p[0]), "confident": "1"})
+        hasil = []
+        for item_ in tampungIndex:
+            print(item_)
+            if float(item_["confident"]) != 0.0:
+                hasil.append(
+                    {"arti": labels[item_["index"]], "confident": item_["confident"]}
+                )
+        json_object = json.dumps(hasil, indent=4)
+        return json_object
+
+        # return json_object
+
+
 if __name__ == "__main__":
     # app.debug = True
     # app.run(debug=True)
