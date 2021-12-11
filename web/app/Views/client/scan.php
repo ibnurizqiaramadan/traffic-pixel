@@ -10,10 +10,10 @@
         <canvas id="canvas" width="400" height="300" class="border rounded"></canvas>
     </div>
     <div class="col-xl-6 col-md-6 col-sm-12">
+        <button class="btn btn-success w-100" id="btnAmbilFoto">Ambil</button>
         <div id="hasilPredict">
             <!-- <p>Hasil : Stop</p> -->
         </div>
-        <button class="btn btn-success" id="btnAmbilFoto">Ambil</button>
     </div>
 </div>
 
