@@ -1,4 +1,5 @@
 var video = document.getElementById('video');
+var videoWidth, videoHeight
 
 // Get access to the camera!
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -12,6 +13,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         //video.src = window.URL.createObjectURL(stream);
         video.srcObject = stream;
         video.play();
+        // alert(video.videoHeight)
     });
 }
 
@@ -19,6 +21,15 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 // var video = document.getElementById('video');
+
+video.addEventListener( "loadedmetadata", function (e) {
+    videoWidth = this.videoWidth,
+    videoHeight = this.videoHeight;
+    // alert(videoHeight + "x" + videoHeight);
+
+    $(canvas).attr("width", videoWidth)
+    $(canvas).attr("height", videoHeight)
+}, false );
 
 function dataURLtoFile(dataurl, filename) {
 
@@ -48,7 +59,7 @@ function saveBase64AsFile(base64, fileName) {
 }
 
 function predict() {
-    context.drawImage(video, 0, 0, 400, 300);
+    context.drawImage(video, 0, 0, videoWidth, videoHeight);
 
     var blobBin = atob(canvas.toDataURL('image/png').split(',')[1]);
     var array = [];
@@ -61,7 +72,7 @@ function predict() {
     formdata.append("imagePredict", file);
 
     $.ajax({
-        url: "https://predict-traffic.inh.pw/predict",
+        url: "http://localhost:6901/predict",
         type: "POST",
 		data: formdata,
 		processData: !1,
