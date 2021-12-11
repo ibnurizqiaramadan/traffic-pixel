@@ -13,4 +13,9 @@ class Home extends BaseController
     {
         return view('frontend/scan');
     }
+
+    public function scan2()
+    {
+        return view('frontend/scan2');
+    }
 }
