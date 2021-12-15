@@ -49,12 +49,12 @@
         </div>
         <!-- About Section Content-->
         <div class="row">
-            <div class="col-lg-4 ms-auto">
+            <div class="col-lg-4 ms-auto text-center">
                 <img src="<?= base_url("assets/front/img/tim/ibnu.jpg") ?>" alt="" class="img-fluid rounded border-0 shadow-2">
                 <p class="h4 mt-3">Ibnu Rizqia Ramadan</p>
                 <p class="lead">Seorang mahasiswa dari kampus STMIK Bandung yang sedang belajar menjadi seorang Fullstack developer</p>
             </div>
-            <div class="col-lg-4 me-auto">
+            <div class="col-lg-4 me-auto text-center">
                 <img src="<?= base_url("assets/front/img/tim/vian.jpg") ?>" alt="" class="img-fluid rounded border-0 shadow-2">
                 <p class="h4 mt-3">Nanda Vian N.</p>
                 <p class="lead">Mahasiswa ITS yang sedang belajar di bidang Machine Learning</p>
