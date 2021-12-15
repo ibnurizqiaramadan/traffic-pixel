@@ -48,16 +48,6 @@ function dataURLtoFile(dataurl, filename) {
     });
 }
 
-function saveBase64AsFile(base64, fileName) {
-    var link = document.createElement("a");
-
-    document.body.appendChild(link); // for Firefox
-
-    link.setAttribute("href", base64);
-    link.setAttribute("download", fileName);
-    link.click();
-}
-
 function predict() {
     context.drawImage(video, 0, 0, videoWidth, videoHeight);
 
@@ -87,29 +77,26 @@ function predict() {
             $("#btnAmbilFoto").removeAttr("disabled")
 		},
 		success: function (e) {
-            let html = ''
+            let html = `
+                <img src="data:image/png;base64,${e.image}" class="img-fluid rounded shadow-2 mb-3 w-100">
+            `
+            html += 'Hasil Predisksi : '
 			// console.log(e);
-            e.forEach(predict => {
-                console.log(predict);
+            e.result.forEach(predict => {
                 html += `
-                    <p class="fs-4">Hasil : ${predict.arti} (${predict.confident})</p>
+                    <p class="m-1 align-left"> - ${predict.arti} (${predict.confident})</p>
                 `
             })
+            msgSweetSuccess(html, {timer: 900000})
             $(`#hasilPredict`).html(html)
 		},
+        error: function (error) {
+            // console.log(error)
+            msgSweetError(error.statusText, {timer: 900000, title: "API Error"})
+        }
     })
 }
-
-setInterval(() => {
-    // predict()
-}, 1000);
 
 $("#btnAmbilFoto").click(e => {
     predict()
 })
-
-// setInterval(() => {
-//     // context.drawImage(video, 0, 0, 255, 255);
-//     // saveBase64AsFile(canvas.toDataURL('image/png'), "asd.png")
-//     // console.log(dataURLtoFile(canvas.toDataURL('image/png'), 'asd.png'));
-// }, 1000);
