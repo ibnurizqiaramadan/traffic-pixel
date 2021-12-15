@@ -16,7 +16,7 @@
         <div class="col-12">
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-md-8 col-sm-12 mt-4">
-                    <button class="btn btn-success w-100 border-0 shadow-2" id="btnAmbilFoto">Ambil</button>
+                    <button class="btn btn-xl mb-5 btn-success w-100 border-0 shadow-2" id="btnAmbilFoto">Ambil</button>
                 </div>
             </div>
         </div>
