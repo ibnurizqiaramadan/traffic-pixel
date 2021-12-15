@@ -3,6 +3,7 @@ import json
 import pandas as pd
 import numpy as np
 import cv2
+import base64
 from uuid import uuid4
 from keras.models import load_model
 from keras.preprocessing import image
@@ -12,7 +13,7 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 cors = CORS(app)
 
-UPLOAD_FOLDER = os.getcwd() + os.path.sep + "images"
+UPLOAD_FOLDER = f"{os.getcwd()}{os.path.sep}images"
 
 model = load_model("../ML/Model/model_final.h5")
 
@@ -97,6 +98,14 @@ def getPredict():
         p = predict_image(findBoundingBox(img_path, filename))
         # os.remove(img_path)
 
+        with open(
+            os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png"), "rb"
+        ) as image_file:
+            imageString = base64.b64encode(image_file.read())
+
+        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], filename + ".png"))
+        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png"))
+
         arrayOri = p[0]
 
         arrayCopy = np.sort(p[0])[::-1]
@@ -125,8 +134,12 @@ def getPredict():
                 hasil.append(
                     {"arti": labels[item_["index"]], "confident": item_["confident"]}
                 )
-        json_object = json.dumps(hasil, indent=4)
-        return json_object
+        resposeData = {
+            "image": imageString.decode("utf-8"),
+            "result": hasil,
+        }
+        # print(resposeData)
+        return json.dumps(resposeData, indent=4)
 
         # return json_object
 
