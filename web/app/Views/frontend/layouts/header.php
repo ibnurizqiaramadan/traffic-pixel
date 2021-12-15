@@ -16,5 +16,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="<?= base_url("assets/front/css/styles.css") ?>" rel="stylesheet" />
-    <link href="<?= base_url("assets/front/css/custom.css") ?>" rel="stylesheet" />
+    <link href="<?= base_url("assets/css/custom.css") ?>" rel="stylesheet" />
+    <link rel="stylesheet" href="<?= base_url("assets/js/module/iziToast.min.js"); ?>">
 </head>

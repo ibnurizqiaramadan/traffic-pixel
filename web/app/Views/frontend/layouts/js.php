@@ -4,6 +4,9 @@
 <!-- * *                               SB Forms JS                               * *-->
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="<?= base_url("assets/js/module/sweetalert2.all.min.js"); ?>" defer></script>
+<script src="<?= base_url("assets/js/module/iziToast.min.js"); ?>" defer></script>
+<script src="<?= base_url("assets/js/app.js"); ?>" defer></script>
 
 <div id="customJsNa">
     <?= $this->renderSection('js'); ?>
