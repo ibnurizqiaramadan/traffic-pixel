@@ -7,6 +7,12 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <meta name="baseUrl" content="<?= base_url() ?>" />
+    <meta property="og:title" content="Traffic Pixel">
+    <meta property="og:description" content="Traffic Pixel Merupakan aplikasi untuk memprediksi arti dari gambar rambu-rambu lalu lintas yang ada di jalan raya ">
+    <meta property="og:image" content="<?= base_url("assets/front/img/icon.png") ?>">
+    <meta property="og:url" content="<?= base_url() ?>">
+    <meta name="dicoding:email" content="vian.nv42@gmail.com">
+
     <title>Traffic Pixel - <?= $title ?? 'Belajar rambu lalulintas'; ?></title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="<?= base_url('assets/front/img/icon.png') ?>">
