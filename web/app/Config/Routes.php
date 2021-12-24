@@ -33,14 +33,49 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('scan', 'Home::scan');
+$routes->get('info', 'Home::info');
 $routes->get('scan-v2', 'Home::scan2');
 $routes->get('login', 'Login::index');
+$routes->get('login/action', 'Login::action');
+$routes->get('login/destroy', 'Login::destroy');
 $routes->get('register', 'Register::index');
 
 $routes->group('client', ['namespace' => 'App\Controllers\Client'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
     $routes->get('dashboard', 'Dashboard::index');
     $routes->get('scan', 'Scan::index');
+});
+
+$routes->group('ruangadmin', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+    $routes->get('/', 'Dashboard::index');
+    $routes->get('dashboard', 'Dashboard::index');
+
+    // user profile routes
+    $routes->group('profile', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+        $routes->get('/', 'Profile::index');
+        $routes->post('update', 'Profile::update');
+        $routes->post('delete', 'Profile::delete');
+        $routes->post('set-password', 'Profile::setPassword');
+        $routes->post('socials-delete', 'Profile::socialsDelete');
+        $routes->post('socials-store', 'Profile::socialsStore');
+        $routes->post('socials-update', 'Profile::socialsUpdate');
+        $routes->post('preview-web', 'Profile::previewWeb');
+        $routes->post('get-web', 'Profile::getWeb');
+        $routes->post('save-web', 'Profile::saveWeb');
+    });
+
+    // User Management routes
+    $routes->group('users', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+        $routes->get('/', 'Users::index');
+        $routes->post('store', 'Users::store');
+        $routes->post('delete', 'Users::delete');
+        $routes->post('update', 'Users::update');
+        $routes->post('reset/(:any)', 'Users::reset_/$1');
+        $routes->post('set/(:any)', 'Users::set_/$1');
+        $routes->post('delete-multiple', 'Users::deleteMultiple');
+        $routes->post('reset-multiple', 'Users::resetMultiple');
+        $routes->post('set-multiple', 'Users::setMultiple');
+    });
 });
 
 /*
