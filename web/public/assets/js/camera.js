@@ -49,18 +49,25 @@ function dataURLtoFile(dataurl, filename) {
 }
 
 function ambilFoto() {
-    $("#cameraSource").addClass('d-none')
-    $("#canvasSource").removeClass('d-none')
-    $("#btnAmbilFoto").addClass('d-none')
-    $("#btnPrediksi").removeClass('d-none')
-    context.drawImage(video, 0, 0, videoWidth, videoHeight);
-    cropper.start(document.getElementById('canvas'), 1)
-    cropper.showImage(document.getElementById('canvas').toDataURL('image/png'))
-    cropper.startCropping()
+    // return
+    window.scrollTo(0, 0);
+    if ($(window).width() < 992) {
+        context.drawImage(video, 0, 0, videoWidth, videoHeight);
+        prediksiFoto(canvas.toDataURL('image/png'))
+    } else {
+        $("#cameraSource").addClass('d-none')
+        $("#canvasSource").removeClass('d-none')
+        $("#btnAmbilFoto").addClass('d-none')
+        $("#btnPrediksi").removeClass('d-none')
+        context.drawImage(video, 0, 0, videoWidth, videoHeight);
+        cropper.start(document.getElementById('canvas'), 1)
+        cropper.showImage(document.getElementById('canvas').toDataURL('image/png'))
+        cropper.startCropping()
+    }
 }
 
-function prediksiFoto() {
-    var blobBin = atob(cropper.getCroppedImageSrc().split(',')[1]);
+function prediksiFoto(image = cropper.getCroppedImageSrc()) {
+    var blobBin = atob(image.split(',')[1]);
     cropper.restore()
     var array = [];
     for(var i = 0; i < blobBin.length; i++) {

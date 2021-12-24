@@ -52,8 +52,8 @@
     color: white !important;
 }
 
-@media only screen and (max-width: 992px) {
+/* @media only screen and (max-width: 992px) {
     body {
         overflow: hidden;
     }
-}
+} */
