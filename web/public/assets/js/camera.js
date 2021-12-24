@@ -73,8 +73,8 @@ function prediksiFoto() {
 
 
     $.ajax({
-        // url: "https://predict-traffic.inh.pw/predict",
-        url: "http://localhost:6901/predict",
+        url: "https://predict-traffic.inh.pw/predict",
+        // url: "http://localhost:6901/predict",
         type: "POST",
 		data: formdata,
 		processData: !1,
