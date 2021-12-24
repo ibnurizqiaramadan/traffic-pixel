@@ -39,3 +39,21 @@
 .shadow-5 {
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
+
+.btn-gan {
+    background-color: #2C3E50 !important;
+}
+
+.btn-gan:hover {
+    color: white !important;
+}
+
+.inputLogin {
+    color: white !important;
+}
+
+/* @media only screen and (max-width: 992px) {
+    body {
+        overflow: hidden;
+    }
+} */
