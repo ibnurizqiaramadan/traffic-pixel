@@ -27,4 +27,4 @@ Untuk menggunakan aplikasi silahkan kunjungi link berikut: [Traffic-Pixel](https
 Silahkan tunjukan gambar rambu lalu lintas yang ingin diprediksi (agar hasil lebih akurat pastikan yang terlihat hanyalah gambar rambu) kemudian tekan tombol ambil
 Hasil prediksi akan langsung ditampilkan beserta tingkat probabilitas menurut model
 ### Demo
-![Demo Website](https://media.giphy.com/media/jHnHdgpy4lRWqx8X8e/giphy.gif)
+![demo2](https://user-images.githubusercontent.com/86766164/147327326-520d7ac3-9d11-423d-a986-30c2ff921f84.gif)
