@@ -48,10 +48,20 @@ function dataURLtoFile(dataurl, filename) {
     });
 }
 
-function predict() {
+function ambilFoto() {
+    $("#cameraSource").addClass('d-none')
+    $("#canvasSource").removeClass('d-none')
+    $("#btnAmbilFoto").addClass('d-none')
+    $("#btnPrediksi").removeClass('d-none')
     context.drawImage(video, 0, 0, videoWidth, videoHeight);
+    cropper.start(document.getElementById('canvas'), 1)
+    cropper.showImage(document.getElementById('canvas').toDataURL('image/png'))
+    cropper.startCropping()
+}
 
-    var blobBin = atob(canvas.toDataURL('image/png').split(',')[1]);
+function prediksiFoto() {
+    var blobBin = atob(cropper.getCroppedImageSrc().split(',')[1]);
+    cropper.restore()
     var array = [];
     for(var i = 0; i < blobBin.length; i++) {
         array.push(blobBin.charCodeAt(i));
@@ -61,8 +71,10 @@ function predict() {
     var formdata = new FormData();
     formdata.append("imagePredict", file);
 
+
     $.ajax({
-        url: "https://predict-traffic.inh.pw/predict",
+        // url: "https://predict-traffic.inh.pw/predict",
+        url: "http://localhost:6901/predict",
         type: "POST",
 		data: formdata,
 		processData: !1,
@@ -87,7 +99,12 @@ function predict() {
                     <p class="m-1 align-left"> - ${predict.arti} (${predict.confident})</p>
                 `
             })
-            msgSweetSuccess(html, {timer: 900000})
+            msgSweetSuccess(html, {timer: 900000}).then(msg => {
+                $("#cameraSource").removeClass('d-none')
+                $("#canvasSource").addClass('d-none')
+                $("#btnAmbilFoto").removeClass('d-none')
+                $("#btnPrediksi").addClass('d-none')
+            })
             $(`#hasilPredict`).html(html)
 		},
         error: function (error) {
@@ -98,5 +115,9 @@ function predict() {
 }
 
 $("#btnAmbilFoto").click(e => {
-    predict()
+    ambilFoto()
+})
+
+$("#btnPrediksi").click(e => {
+    prediksiFoto()
 })
