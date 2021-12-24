@@ -22,6 +22,9 @@ Saat ini versi alpha aplikasi bisa diakses pada link berikut [Traffic-Pixel](htt
 ## Bentuk Tampilan Website
 - Landing Page ![image](https://user-images.githubusercontent.com/86766164/147044383-36e96c3c-2ea8-4291-9c22-a84afa0505c5.png)
 
-
-
-
+## Memakai aplikasi
+Untuk menggunakan aplikasi silahkan kunjungi link berikut: [Traffic-Pixel](https://traffic-pixel.inh.pw/) kemudian pilih menu pindai kemudian pengguna akan diminta untuk menginjinkan akses kamera pada perangkat yang digunakan
+Silahkan tunjukan gambar rambu lalu lintas yang ingin diprediksi (agar hasil lebih akurat pastikan yang terlihat hanyalah gambar rambu) kemudian tekan tombol ambil
+Hasil prediksi akan langsung ditampilkan beserta tingkat probabilitas menurut model
+### Demo
+![Demo Website](https://media.giphy.com/media/jHnHdgpy4lRWqx8X8e/giphy.gif)
