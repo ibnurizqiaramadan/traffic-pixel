@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import cv2
 import base64
+import tensorflow as tf
 from uuid import uuid4
 from keras.models import load_model
 from keras.preprocessing import image
@@ -50,9 +51,9 @@ labels = label_text("../ML/Dataset/label_names.csv")
 
 
 def predict_image(path):
-    # print(path)
-    i = image.load_img(path, target_size=(32, 32))
-    i = image.img_to_array(i)
+    print(path)
+    i = tf.keras.utils.load_img(path, target_size=(32, 32))
+    i = tf.keras.utils.img_to_array(i)
     x = np.expand_dims(i, axis=0)
     hasil = model.predict(x)
     return hasil
@@ -62,7 +63,8 @@ def findBoundingBox(img_path, filename):
     image = cv2.imread(img_path)
     # original = image.copy()
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
+    thresh = cv2.threshold(
+        gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
 
     # Find contours, obtain bounding box, extract and save ROI
     cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -79,10 +81,11 @@ def findBoundingBox(img_path, filename):
             mx_area = area
     x, y, w, h = mx
 
-    roi = image[y : y + h, x : x + w]
+    roi = image[y: y + h, x: x + w]
     # print()
     cv2.imwrite(
-        os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png"), roi
+        os.path.join(app.config["UPLOAD_FOLDER"],
+                     filename + "-croped.png"), roi
     )
     return os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png")
 
@@ -99,12 +102,14 @@ def getPredict():
         # os.remove(img_path)
 
         with open(
-            os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png"), "rb"
+            os.path.join(app.config["UPLOAD_FOLDER"],
+                         filename + "-croped.png"), "rb"
         ) as image_file:
             imageString = base64.b64encode(image_file.read())
 
         os.remove(os.path.join(app.config["UPLOAD_FOLDER"], filename + ".png"))
-        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png"))
+        os.remove(os.path.join(
+            app.config["UPLOAD_FOLDER"], filename + "-croped.png"))
 
         arrayOri = p[0]
 
@@ -132,7 +137,8 @@ def getPredict():
             print(item_)
             if float(item_["confident"]) != 0.0:
                 hasil.append(
-                    {"arti": labels[item_["index"]], "confident": item_["confident"]}
+                    {"arti": labels[item_["index"]],
+                        "confident": item_["confident"]}
                 )
         resposeData = {
             "image": imageString.decode("utf-8"),
@@ -155,7 +161,8 @@ def getPredict2():
         p = predict_image(findBoundingBox(img_path, filename))
 
         os.remove(os.path.join(app.config["UPLOAD_FOLDER"], filename + ".png"))
-        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], filename + "-croped.png"))
+        os.remove(os.path.join(
+            app.config["UPLOAD_FOLDER"], filename + "-croped.png"))
 
         arrayOri = p[0]
 
@@ -183,7 +190,8 @@ def getPredict2():
             print(item_)
             if float(item_["confident"]) != 0.0:
                 hasil.append(
-                    {"arti": labels[item_["index"]], "confident": item_["confident"]}
+                    {"arti": labels[item_["index"]],
+                        "confident": item_["confident"]}
                 )
         json_object = json.dumps(hasil, indent=4)
         return json_object
